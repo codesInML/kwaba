@@ -46,15 +46,16 @@ export const signOutController = async (req: Request, res: Response) => {
 // @desc    Register User
 // @route   POST    /api/v1/auth/register
 export const registerController = async (req: Request, res: Response) => {
-  const { fullName, email, password } = req.body;
+  const { fullName, email, tag, password } = req.body;
 
   const data = await createUserService({
     fullName,
+    tag,
     email,
     password,
   });
 
-  if (!data) throw new BadRequestError("User exists");
+  if (!data) throw new BadRequestError("User with the tag or email exists");
 
   // Generate the JWT and attach it to the req session object
   generateJWT(req, { id: `${data.id}`, email: data.email });

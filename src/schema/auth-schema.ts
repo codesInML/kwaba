@@ -3,6 +3,7 @@ import { body } from "express-validator";
 export const registerSchema = () => {
   return [
     body("fullName").notEmpty().withMessage("Please provide a name"),
+    body("tag").notEmpty().withMessage("Please provide a tag"),
     body("email").isEmail().withMessage("Please provide a valid email"),
     body("password")
       .notEmpty()

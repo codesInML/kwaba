@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { accountRoute } from "./account-route";
+import { accountRoute } from "./saving-route";
 import { authenticationRoutes } from "./auth-route";
 
 const router = Router();
 
 router.use("/auth", authenticationRoutes);
-router.use("/account", accountRoute);
+router.use("/saving", accountRoute);
 
 export { router as applicationRoutes };

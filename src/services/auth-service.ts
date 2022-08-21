@@ -3,18 +3,18 @@ import { Model, Password } from "../helpers";
 
 export const createUserService = async (data: {
   fullName: string;
+  tag: string;
   email: string;
   password: string;
 }) => {
   try {
     const password = await Password.toHash(data.password);
     const [id] = await knex(Model.user).insert({
-      fullName: data.fullName,
-      email: data.email,
+      ...data,
       password,
     });
 
-    return { id, fullName: data.fullName, email: data.email };
+    return { id, fullName: data.fullName, tag: data.tag, email: data.email };
   } catch (error) {
     return null;
   }
