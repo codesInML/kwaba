@@ -1,8 +1,7 @@
 import knex from "../db";
-import { Model, Password } from "../helpers";
+import { Model } from "../helpers";
 import { customAlphabet } from "nanoid";
 import Logger from "../logger";
-import { UserPayload } from "../middleware";
 
 const nanoid = customAlphabet("0123456789", 10);
 
@@ -28,15 +27,12 @@ export const createSavingService = async (
 ): Promise<SavingData | null> => {
   try {
     const [id] = await knex(Model.saving).insert(data);
-    await knex(Model.users_savings).insert({
-      user_id: data.createdBy,
-      saving_id: id,
-    });
 
     const user = await knex(Model.saving).select("*").where({ id });
 
     return user[0];
   } catch (error) {
+    Logger.error(error);
     return null;
   }
 };
@@ -120,12 +116,6 @@ export const updateInviteService = async (
       return "you've previously accepted this invite";
 
     await knex(Model.invite).where({ id: inviteID }).update({ status });
-
-    if (status == "ACCEPTED")
-      await knex(Model.users_savings).insert({
-        user_id: userID,
-        saving_id: invite.saving_id,
-      });
 
     return (await knex(Model.invite).select("*").where({ id: inviteID }))[0];
   } catch (error) {

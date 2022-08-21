@@ -6,7 +6,7 @@ export async function up(knex: Knex): Promise<void> {
     table.integer("from").notNullable();
     table.integer("to").notNullable();
     table.string("status").notNullable();
-    table.integer("saving_id").unsigned().unique().references("saving.id");
+    table.integer("saving_id").unsigned().references("saving.id");
     table.timestamps(true, true, true);
   });
 }

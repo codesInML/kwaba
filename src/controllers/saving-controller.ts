@@ -38,6 +38,8 @@ export const createSavingController = async (req: Request, res: Response) => {
     createdBy: +req.currentUser?.id!,
   });
 
+  if (!saving) throw new BadRequestError("something went wrong");
+
   return successResponse(res, StatusCodes.CREATED, saving);
 };
 

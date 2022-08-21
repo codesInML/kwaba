@@ -7,5 +7,4 @@ export enum Model {
   user = "user",
   saving = "saving",
   invite = "invite",
-  users_savings = "users_savings",
 }
