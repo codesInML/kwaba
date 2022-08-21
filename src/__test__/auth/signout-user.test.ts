@@ -21,6 +21,7 @@ describe("Signout a User", () => {
       .send({
         fullName: "John Doe",
         email: "john@doe.com",
+        tag: "johnDoe",
         password: "johnDoe123",
       })
       .expect(StatusCodes.CREATED);
@@ -30,7 +31,7 @@ describe("Signout a User", () => {
       .expect(StatusCodes.OK);
     expect(response.get("Set-Cookie")).toBeDefined();
     expect(response.get("Set-Cookie")[0]).toBe(
-      "lendsqr-session=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; samesite=lax; httponly"
+      "kwaba-session=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; samesite=lax; httponly"
     );
   });
 });

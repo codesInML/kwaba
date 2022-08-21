@@ -16,6 +16,7 @@ describe("Current User", () => {
       .send({
         fullName: "John Doe",
         email: "john@doe.com",
+        tag: "johnDoe",
         password: "johnDoe123",
       })
       .expect(StatusCodes.CREATED);

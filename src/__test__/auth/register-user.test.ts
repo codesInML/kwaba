@@ -21,6 +21,7 @@ describe("Register User", () => {
       .send({
         fullName: "John Doe",
         email: "john@doe.com",
+        tag: "johnDoe",
         password: "johnDoe123",
       })
       .expect(StatusCodes.CREATED);
@@ -31,6 +32,7 @@ describe("Register User", () => {
       .send({
         fullName: "John Doe",
         email: "john@doe.com",
+        tag: "johnDoe",
         password: "johnDoe123",
       })
       .expect(StatusCodes.CREATED);
@@ -54,6 +56,7 @@ describe("Register User", () => {
       .send({
         fullName: "John Doe",
         email: "john@doe.com",
+        tag: "johnDoe",
         password: "johnDoe123",
       })
       .expect(StatusCodes.CREATED);
@@ -63,16 +66,19 @@ describe("Register User", () => {
       .send({
         fullName: "Jane Doe",
         email: "john@doe.com",
+        tag: "johnDoe",
         password: "johnDoe123",
       })
       .expect(StatusCodes.BAD_REQUEST);
   });
+
   it("returns 400 with an invalid password", async () => {
     await request
       .post(`/api/v1/auth/register`)
       .send({
         fullName: "John Doe",
         email: "john@doe.com",
+        tag: "johnDoe",
         password: "joh",
       })
       .expect(StatusCodes.BAD_REQUEST);
